@@ -22,13 +22,17 @@ export const SwipeCard = ({ user, onLike, onDislike }: SwipeCardProps) => {
   const handleDislike = () => onDislike(user.id);
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev < user.profileImages.length - 1 ? prev + 1 : prev
-    );
+    if (user.profileImages && user.profileImages.length > 0) {
+      setCurrentImageIndex((prev) => 
+        prev < user.profileImages.length - 1 ? prev + 1 : prev
+      );
+    }
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => prev > 0 ? prev - 1 : prev);
+    if (user.profileImages && user.profileImages.length > 0) {
+      setCurrentImageIndex((prev) => prev > 0 ? prev - 1 : prev);
+    }
   };
 
   return (
@@ -61,7 +65,7 @@ export const SwipeCard = ({ user, onLike, onDislike }: SwipeCardProps) => {
       {/* Image with dots indicator */}
       <div className="relative h-3/5">
         <img
-          src={user.profileImages[currentImageIndex]}
+          src={user.profileImages?.[currentImageIndex] || user.profileImages?.[0] || "/placeholder-profile.svg"}
           alt={user.name}
           className="w-full h-full object-cover"
           data-testid={`profile-image-${user.id}`}
@@ -80,7 +84,7 @@ export const SwipeCard = ({ user, onLike, onDislike }: SwipeCardProps) => {
         />
 
         {/* Image dots */}
-        {user.profileImages.length > 1 && (
+        {user.profileImages && user.profileImages.length > 1 && (
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex space-x-1">
             {user.profileImages.map((_, index) => (
               <div
@@ -110,22 +114,24 @@ export const SwipeCard = ({ user, onLike, onDislike }: SwipeCardProps) => {
         </p>
 
         {/* Interests */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {user.interests.slice(0, 3).map((interest, index) => (
-            <span
-              key={index}
-              className="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm"
-              data-testid={`interest-${index}`}
-            >
-              {interest}
-            </span>
-          ))}
-          {user.interests.length > 3 && (
-            <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
-              +{user.interests.length - 3} more
-            </span>
-          )}
-        </div>
+        {user.interests && user.interests.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {user.interests.slice(0, 3).map((interest, index) => (
+              <span
+                key={index}
+                className="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm"
+                data-testid={`interest-${index}`}
+              >
+                {interest}
+              </span>
+            ))}
+            {user.interests.length > 3 && (
+              <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
+                +{user.interests.length - 3} more
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Action buttons */}
         <div className="flex items-center justify-center space-x-8">

@@ -102,7 +102,7 @@ export const ChatScreen = ({ matchId, partnerId, partnerProfile, onBack }: ChatS
           <ArrowLeft />
         </button>
         <img
-          src={partnerProfile.profileImages[0]}
+          src={partnerProfile.profileImages?.[0] || "/placeholder-profile.svg"}
           alt={partnerProfile.name}
           className="w-10 h-10 rounded-full object-cover"
           data-testid="partner-avatar"
@@ -135,7 +135,7 @@ export const ChatScreen = ({ matchId, partnerId, partnerProfile, onBack }: ChatS
               >
                 {!isFromCurrentUser && (
                   <img
-                    src={partnerProfile.profileImages[0]}
+                    src={partnerProfile.profileImages?.[0] || "/placeholder-profile.svg"}
                     alt={partnerProfile.name}
                     className="w-8 h-8 rounded-full object-cover"
                   />

@@ -264,7 +264,7 @@ export const MainApp = () => {
                   data-testid={`match-${match.id}`}
                 >
                   <img
-                    src={partnerProfile.profileImages[0]}
+                    src={partnerProfile.profileImages?.[0] || "/placeholder-profile.svg"}
                     alt={partnerProfile.name}
                     className="w-full h-48 object-cover"
                   />
@@ -318,7 +318,7 @@ export const MainApp = () => {
                   data-testid={`chat-${match.id}`}
                 >
                   <img
-                    src={partnerProfile.profileImages[0]}
+                    src={partnerProfile.profileImages?.[0] || "/placeholder-profile.svg"}
                     alt={partnerProfile.name}
                     className="w-16 h-16 rounded-full object-cover"
                   />
@@ -348,7 +348,7 @@ export const MainApp = () => {
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-4">
           <div className="flex items-center space-x-4 mb-6">
             <img
-              src={userProfile?.profileImages[0] || ""}
+              src={userProfile?.profileImages?.[0] || "/placeholder-profile.svg"}
               alt="Your profile"
               className="w-20 h-20 rounded-full object-cover"
               data-testid="user-profile-image"

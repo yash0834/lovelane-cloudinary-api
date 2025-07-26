@@ -25,13 +25,13 @@ export const MatchModal = ({
         <div className="mb-6">
           <div className="flex justify-center space-x-4 mb-4">
             <img
-              src={currentUser.profileImages[0]}
+              src={currentUser.profileImages?.[0] || "/placeholder-profile.svg"}
               alt="Your profile"
               className="w-20 h-20 rounded-full object-cover border-4 border-pink-500"
               data-testid="current-user-image"
             />
             <img
-              src={matchedUser.profileImages[0]}
+              src={matchedUser.profileImages?.[0] || "/placeholder-profile.svg"}
               alt="Match profile"
               className="w-20 h-20 rounded-full object-cover border-4 border-pink-500"
               data-testid="matched-user-image"
